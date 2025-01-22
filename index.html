@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Golf Hub</h1>
+    </header>
+
+
+    
+    <div class="image-container">
+        <img src="golf course 1.jpg" alt="golf course 1">
+        <img src="golf course 2.jpg" alt="golf course 2">
+        <img src="golf course 3.jpg" alt="golf course 3">
+        <img src="golf course 4.jpg" alt="golf course 4">
+        <img src="golf course 5.jpg" alt="golf course 5">
+        <img src="golf course 6.jpg" alt="golf course 6">
+        <img src="golf course 7.jpg" alt="golf course 7">
+        <img src="golf course 8.jpg" alt="golf course 8">
+        <img src="golf course 9.jpg" alt="golf course 9">
+        <img src="golf course 10.jpg" alt="golf course 10">
+        <!-- Add more images as needed -->
+    </div>
+
+    <nav>
+        <a href="#Golf Gears">Golf Gears</a>
+        <a href="#Course Recommendations">Course Recommendations</a>
+        <a href="#Golf Rules">Golf Rules</a>
+    </nav>
+
+    <main>
+        <section id="Golf Gears">
+            <h2>Golf Gears</h2>
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search Golf Gear...">
+                <button id="search-btn">Search</button>
+            </div>
+            <ul id="gear-list">
+                <li><a href="https://www.titleist.com" target="_blank">Titleist</a></li>
+                <li><a href="https://www.callawaygolf.com" target="_blank">Callaway</a></li>
+                <li><a href="https://www.taylormadegolf.com" target="_blank">TaylorMade</a></li>
+                <li><a href="https://www.ping.com" target="_blank">PING</a></li>
+                <li><a href="https://www.clevelandgolf.com" target="_blank">Cleveland Golf</a></li>
+            </ul>
+        </section>
+        <section id="Course Recommendations">
+            <h2>Course Recommendations</h2>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slider-item">
+                        <a href="https://www.pelicanhill.com/golf" target="_blank">
+                            <img src="https://www.pelicanhill.com/images/pelican-hill-golf-course-1800x780.jpg" alt="Pelican Hill Golf Club">
+                        </a>
+                    </div>
+                    <div class="slider-item">
+                        <a href="https://www.oakcreekgolfclub.com/" target="_blank">
+                            <img src="https://www.oakcreekgolfclub.com/wp-content/uploads/2023/10/OC-hero-1-1920x1080.jpg" alt="Oak Creek Golf Club">
+                        </a>
+                    </div>
+                    <div class="slider-item">
+                        <a href="https://www.monarchbeachgolf.com/" target="_blank">
+                            <img src="https://www.monarchbeachgolf.com/wp-content/uploads/sites/8904/2023/06/signup2.jpg" alt="Monarch Beach Golf Links">
+                        </a>
+                    </div>
+                    <div class="slider-item">
+                        <a href="https://www.sf-golf.com/" target="_blank">
+                            <img src="https://www.sf-golf.com/wp-content/uploads/2020/11/premier-golf-course-in-southern-california-min.jpg" alt="Strawberry Farm Golf Club">
+                        </a>
+                    </div>
+                </div>
+                <button class="prev" id="prev-btn">&#10094;</button>
+                <button class="next" id="next-btn">&#10095;</button>
+            </div>
+        </section>
+        <section id="Golf ules">
+            <h2>Golf Rules</h2>
+            
+            <ul>
+                <li><a href="https://www.usga.org" target="_blank">Official USGA Golf Rules</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Email for more information <a href="mailto:ewei01@risd.edu">Email us</a></p>
+    </footer>
+
+    <script>
+        // Search functionality for Golf Gear section
+        const searchInput = document.getElementById('search');
+        const searchButton = document.getElementById('search-btn');
+        const gearList = document.getElementById('gear-list');
+        
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const items = gearList.getElementsByTagName('li');
+            Array.from(items).forEach(item => {
+                const linkText = item.textContent.toLowerCase();
+                if (linkText.includes(searchTerm)) {
+                    item.style.display = 'list-item';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Image slider functionality
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slider = document.querySelector('.slider');
+        let index = 0;
+        
+        function updateSlider() {
+            const items = document.querySelectorAll('.slider-item');
+            const totalItems = items.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+        
+        prevBtn.addEventListener('click', function() {
+            index = (index === 0) ? 3 : index - 1; // Loop back to last slide
+            updateSlider();
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            index = (index === 3) ? 0 : index + 1; // Loop back to first slide
+            updateSlider();
+        });
+    </script>
+
+
+<script>
+    // Function to randomly position images
+    function shuffleImages() {
+        const container = document.querySelector('.image-container');
+        const images = container.querySelectorAll('img');
+
+        // Shuffle the images array
+        for (let i = images.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [images[i].style.left, images[j].style.left] = [images[j].style.left, images[i].style.left];
+            [images[i].style.top, images[j].style.top] = [images[j].style.top, images[i].style.top];
+        }
+
+        // Set random positions for each image
+        images.forEach(image => {
+            const randomX = Math.floor(Math.random() * (container.offsetWidth - image.width));
+            const randomY = Math.floor(Math.random() * (container.offsetHeight - image.height));
+            image.style.left = `${randomX}px`;
+            image.style.top = `${randomY}px`;
+        });
+    }
+
+    // Call shuffleImages function when the page loads
+    window.onload = shuffleImages;
+</script>
+
+</body>
+</html>
